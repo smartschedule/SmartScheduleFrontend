@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Calendar :days="days" :current="current"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Calendar from "../components/Calendar";
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      days: [...Array(30).keys()].map(x => x + 1),
+      current: {
+        day: 20,
+        month: 5,
+        year: 2018
+      }
+    };
+  },
+  components: { Calendar }
+};
 </script>
+
+<style lang="scss">
+</style>
