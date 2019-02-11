@@ -64,7 +64,6 @@ export default {
 .foo {
   display: flex;
   flex-direction: row;
-  color: rgba(0, 0, 0, 0.3);
 }
 .header {
   font-weight: 800;
@@ -73,10 +72,15 @@ export default {
 .time {
   position: relative;
   margin-left: 10px;
+  width: 100%;
 }
 .timeline {
   position: relative;
-  width: 10px;
+  width: 50px;
+  text-align: right;
+  user-select: none;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.3);
 }
 .event {
   font-size: 100%;

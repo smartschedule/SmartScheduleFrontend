@@ -12,7 +12,7 @@
           v-for="day in days"
           :key="day"
           class="day"
-          :class="{'day--current': day === current.day }"
+          :class="{'day--current': day === current.day && selectedMonth === current.month }"
           @click="() => {current.day = day}"
         >{{day}}</div>
       </div>
@@ -22,25 +22,14 @@
 
 <script>
 import Events from "./Events";
+import placeholderData from "./events.js";
 export default {
   components: { Events },
   data() {
     return {
       selectedMonth: null,
       selectedYear: null,
-      events: [
-        {
-          id: 25,
-          name: "asd",
-          from: 9,
-          to: 15,
-          color: {
-            r: 222,
-            g: 213,
-            b: 242
-          }
-        }
-      ]
+      events: placeholderData
     };
   },
   props: {
@@ -109,12 +98,18 @@ export default {
   font-weight: 800;
   margin-top: 20px;
   margin-bottom: 50px;
+  transition: all 200ms ease-out;
   .arrow {
     color: rgba(255, 255, 255, 0.6);
     font-size: 20px;
-    margin-left: 15px;
-    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     cursor: pointer;
+    transition: all 200ms ease-out;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.3);
+    }
   }
 }
 .side {
@@ -147,10 +142,14 @@ export default {
   height: 30px;
   color: white;
   cursor: pointer;
-  transition: 200ms all ease-out;
-  border-radius: 20%;
+  transition: 150ms all ease-in;
+  border-radius: 35%;
   &--current {
     background-color: #4964d6;
+    border-radius: 50%;
+  }
+  &:hover {
+    background-color: gray;
     border-radius: 50%;
   }
   user-select: none;
