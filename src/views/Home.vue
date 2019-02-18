@@ -1,25 +1,36 @@
 <template>
   <div>
-    <Calendar :days="days" :current="current"/>
+    <div class="calendar-container">
+      <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'xd', id: 5}]"/>
+      <Calendar :events="events" @addevent="() => addEventsVisible = true"/>
+    </div>
+    <AddEvent @close="()=>addEventsVisible=false" :visible="addEventsVisible"/>
   </div>
 </template>
 
 <script>
-import Calendar from "../components/Calendar";
+import CalendarPicker from "$c/CalendarPicker";
+import Calendar from "$c/Calendar";
+import AddEvent from "$c/AddEvent";
+import { events } from "$c/helpers.js";
+
 export default {
   data() {
     return {
-      days: [...Array(30).keys()].map(x => x + 1),
-      current: {
-        day: 20,
-        month: 5,
-        year: 2018
-      }
+      events,
+      addEventsVisible: false,
+      selectedCalendarId: 0
     };
   },
-  components: { Calendar }
+  components: { Calendar, AddEvent, CalendarPicker }
 };
 </script>
 
 <style lang="scss">
+.calendar-container {
+  display: flex;
+}
+.calendar-wrapper {
+  height: 100%;
+}
 </style>
