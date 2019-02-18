@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    <Events :events="events" :currentDate="current"/>
+    <Events :events="eventsForCurrentDay" @addevent="$emit('addevent')" :currentDate="current"/>
     <div class="side">
       <div class="monthpicker">
         <span class="arrow" @click="() => incrementMonth(-1)"><</span>
@@ -9,11 +9,12 @@
       </div>
       <div class="days">
         <div
-          v-for="day in days"
+          v-for="day in getDaysInMonth"
           :key="day"
           class="day"
-          :class="{'day--current': day === current.day }"
-          @click="() => {current.day = day}"
+          :class="{'day--current': day === current.day && selectedMonth === current.month && current.year == selectedYear,
+          'day--has-event': dayNumbersWithEventsCurrentMonth.includes(day) }"
+          @click="() => {current.day = day; current.month = selectedMonth; current.year = selectedYear}"
         >{{day}}</div>
       </div>
     </div>
@@ -22,35 +23,21 @@
 
 <script>
 import Events from "./Events";
+import placeholderData from "./helpers.js";
+import { isEqual } from "lodash";
+
 export default {
   components: { Events },
   data() {
     return {
       selectedMonth: null,
       selectedYear: null,
-      events: [
-        {
-          id: 25,
-          name: "asd",
-          from: 9,
-          to: 15,
-          color: {
-            r: 222,
-            g: 213,
-            b: 242
-          }
-        }
-      ]
+      current: this.getToday()
     };
   },
   props: {
-    days: {
+    events: {
       type: Array,
-      required: true
-    },
-    current: {
-      //day month year numerically
-      type: Object,
       required: true
     }
   },
@@ -60,9 +47,14 @@ export default {
     this.selectedYear = year;
   },
   computed: {
+    getDaysInMonth() {
+      const { selectedMonth: m, selectedYear: y } = this;
+      const numberOfDaysInMonth = new Date(y, m, 0).getDate();
+      return Array.from({ length: numberOfDaysInMonth }, (v, k) => k + 1); //1, 2, ..., 31
+    },
     getMonthYearString() {
       const { month: m, day: d, year: y } = this.current;
-      const date = new Date(this.selectedYear, this.selectedMonth - 1, d);
+      const date = new Date(this.selectedYear, this.selectedMonth, d);
       return date.toLocaleString("en-GB", {
         month: "long",
         year: "numeric"
@@ -76,19 +68,47 @@ export default {
         month: "long",
         year: "numeric"
       });
+    },
+    eventsForCurrentDay() {
+      const { events, current } = this;
+      return events.filter(({ day, month, year }) => {
+        const obj = {
+          day,
+          month,
+          year
+        };
+        return isEqual(obj, current);
+      });
+    },
+    dayNumbersWithEventsCurrentMonth() {
+      const { events, selectedMonth, selectedYear } = this;
+      return events
+        .filter(
+          ({ month, year }) => month === selectedMonth && year === selectedYear
+        )
+        .map(({ day }) => day);
     }
   },
   methods: {
+    getToday() {
+      const now = new Date();
+      return {
+        day: now.getDay(),
+        month: now.getMonth(),
+        year: now.getFullYear()
+      };
+    },
     incrementMonth(value) {
       const { selectedMonth: x } = this;
       if (x + value > 12) {
-        this.selectedYear += 1;
-        this.selectedMonth = 1;
+        this.selectedYear++;
+        this.selectedMonth = 0;
+        this.selectedMonth += value;
       } else if (x + value < 1) {
-        this.selectedYear -= 1;
-        this.selectedYMonth = 12;
-      }
-      this.selectedMonth += value;
+        this.selectedYear--;
+        this.selectedMonth = 13;
+        this.selectedMonth += value;
+      } else this.selectedMonth += value;
     }
   }
 };
@@ -96,10 +116,10 @@ export default {
 
 <style lang="scss">
 .calendar {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  height: 600px;
 }
 .monthpicker {
   color: white;
@@ -152,6 +172,10 @@ export default {
   &--current {
     background-color: #4964d6;
     border-radius: 50%;
+    cursor: default;
+  }
+  &--has-event {
+    border: 2px gray solid;
   }
   user-select: none;
 }
