@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal ok-only @hidden="$emit('hidden')" :visible="visible">Name
+    <b-modal ok-only @hidden="$emit('hidden')" :visible="visible" title="Add calendar">Name
       <b-input type="text" placeholder="Calendar name"/>Buddies
       <b-form-select multiple :options="buddies"/>
       <template slot="modal-footer">

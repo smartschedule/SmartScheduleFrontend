@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container fluid>
     <b-row>
       <b-col>
         <div v-if="buddies.length===0">You have no friends loser</div>

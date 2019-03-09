@@ -2,7 +2,7 @@
   <b-container fluid>
     <b-row align-v="center" class="my-3">
       <b-col>
-          <div flex class="d-flex">
+          <div class="d-flex">
             <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'xd', id: 5}]" class="mr-3"/>
             <Calendar :events="events" @addevent="() => addEventsVisible = true"/>
           </div>
