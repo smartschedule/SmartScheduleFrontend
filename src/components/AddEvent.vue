@@ -1,5 +1,5 @@
 <template>
-  <b-modal :visible="visible" @hidden="$emit('close')" ok-only>Event name
+  <b-modal :visible="visible" @hidden="$emit('close')" ok-only title="Add event">Event name
     <b-input type="text" placeholder="Event name (eg. John's birthday)"/>Event date
     <b-input type="date" placeholder="Event date"/>Event duration
     <div class="splitter">From
