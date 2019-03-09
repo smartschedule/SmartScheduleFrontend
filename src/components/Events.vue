@@ -75,7 +75,7 @@ export default {
 .events {
   width: 100%;
   height: 100%;
-  background: white;
+  background: #eaecee;
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 40px;

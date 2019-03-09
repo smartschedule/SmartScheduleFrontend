@@ -150,7 +150,7 @@ export default {
   flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
-  background: #605f6f;
+  background: #0d47a1;
   justify-content: flex-start;
   align-content: center;
   padding-left: 20px;

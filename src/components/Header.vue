@@ -9,7 +9,6 @@
         <b-nav-item to="/calendars">Calendars</b-nav-item>
         <b-nav-item to="/friends">Friends</b-nav-item>
       </b-navbar-nav>
-
       <CurrentUserInfo/>
     </b-collapse>
   </b-navbar>
@@ -23,16 +22,15 @@ export default {
 </script>
 
 <style lang="scss">
-#nav {
-  padding: 30px;
-  box-shadow: inset 0px -1px 2px 0px rgba(0, 0, 0, 0.75);
+nav {
+  background-color: #002171;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.nav-item {
+  font-size: 0.85rem;
+}
+
+.navbar-brand {
+  font-size: 1.2rem;
 }
 </style>

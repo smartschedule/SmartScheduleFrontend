@@ -6,8 +6,8 @@
       <b-nav-item to="/logout">Logout</b-nav-item>
     </b-navbar-nav>
     <b-navbar-nav v-else>
-      <b-nav-item to="/register">Register</b-nav-item>
       <b-nav-item to="/login">Login</b-nav-item>
+      <b-nav-item to="/register">Register</b-nav-item>
     </b-navbar-nav>
   </b-navbar-nav>
 </template>
