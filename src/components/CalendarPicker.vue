@@ -43,6 +43,7 @@ export default {
   text-align-last: left;
   padding: 20px;
   width: 200px;
+  background-color: white;
   &__calendar {
     cursor: pointer;
     padding: 5px;

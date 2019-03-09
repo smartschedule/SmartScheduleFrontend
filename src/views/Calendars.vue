@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <div class="calendar-container">
-      <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'xd', id: 5}]"/>
-      <Calendar :events="events" @addevent="() => addEventsVisible = true"/>
-    </div>
-    <AddEvent @close="()=>addEventsVisible=false" :visible="addEventsVisible"/>
-  </div>
+  <b-container fluid>
+    <b-row align-v="center" class="my-3">
+      <b-col>
+          <div flex class="d-flex">
+            <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'xd', id: 5}]" class="mr-3"/>
+            <Calendar :events="events" @addevent="() => addEventsVisible = true"/>
+          </div>
+          <AddEvent @close="()=>addEventsVisible=false" :visible="addEventsVisible"/>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -27,10 +31,4 @@ export default {
 </script>
 
 <style lang="scss">
-.calendar-container {
-  display: flex;
-}
-.calendar-wrapper {
-  height: 100%;
-}
 </style>

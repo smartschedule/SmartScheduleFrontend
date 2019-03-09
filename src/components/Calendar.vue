@@ -120,6 +120,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  background-color: white;
 }
 .monthpicker {
   color: white;
