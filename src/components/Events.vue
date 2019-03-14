@@ -1,10 +1,16 @@
 <template>
   <div class="events">
     <div class="header">
-      {{dateHeader}}
-      <b-btn size="sm" variant="success" @click="$emit('addevent')">Add Event</b-btn>
+      <b-container>
+        <b-row align-h="between">
+          <b-col cols="auto">{{dateHeader}}</b-col>
+          <b-col cols="auto">
+            <b-btn size="sm" variant="success" @click="$emit('addevent')">Add Event</b-btn>
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
-    <div class="foo">
+    <div class="foo mt-2 border-top border-bottom">
       <div class="timeline">
         <div v-for="x in twentyFour" :key="x">{{x}}</div>
       </div>
@@ -75,8 +81,8 @@ export default {
 .events {
   width: 100%;
   height: 100%;
-  background: white;
   padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 40px;
 }

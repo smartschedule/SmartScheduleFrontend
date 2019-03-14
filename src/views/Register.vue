@@ -12,7 +12,7 @@
         </b-form-group>
         <b-form-group label="Password">
           <b-form-input type="password" v-model="password" placeholder="Enter password"/>
-          <b-form-input type="password" v-model="confirmpassword" placeholder="Repeat password"/>
+          <b-form-input type="password" class="mt-2" v-model="confirmpassword" placeholder="Repeat password"/>
         </b-form-group>
         <b-btn class="mt-3" :disabled="disabled" @click="onRegisterClick" variant="success">Register</b-btn>
       </b-form>

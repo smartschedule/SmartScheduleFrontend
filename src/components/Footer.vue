@@ -1,5 +1,7 @@
 <template>
-  <div class="footer_wrapper">Copyright ©️ Smart Schedule {{new Date().getFullYear()}}</div>
+  <footer class="my-footer mt-auto py-3 bg-primary">
+    Copyright ©️ Smart Schedule {{new Date().getFullYear()}}
+  </footer>
 </template>
 
 <script>
@@ -7,8 +9,8 @@ export default {};
 </script>
 
 <style lang="scss">
-.footer_wrapper {
-  background: #605f6f;
+.my-footer {
+  background: #002171;
   color: ivory;
   padding: 20px;
   user-select: none;

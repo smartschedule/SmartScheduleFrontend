@@ -4,7 +4,7 @@
     <div class="side">
       <div class="monthpicker">
         <span class="arrow" @click="() => incrementMonth(-1)"><</span>
-        <span>{{getMonthYearString}}</span>
+        <span class="month-name">{{getMonthYearString}}</span>
         <span class="arrow" @click="()=> incrementMonth(1)">></span>
       </div>
       <div class="days">
@@ -120,6 +120,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  background-color: white;
 }
 .monthpicker {
   color: white;
@@ -142,6 +143,9 @@ export default {
       color: rgba(255, 255, 255, 0.3);
     }
   }
+  .month-name {
+    padding-top: 4px
+  }
 }
 .side {
   display: flex;
@@ -150,7 +154,7 @@ export default {
   flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
-  background: #605f6f;
+  background: #0d47a1;
   justify-content: flex-start;
   align-content: center;
   padding-left: 20px;
@@ -176,15 +180,15 @@ export default {
   transition: 150ms all ease-in;
   border-radius: 35%;
   &--current {
-    background-color: #4964d6;
+    background-color: #fd7e14;
     border-radius: 50%;
     cursor: default;
   }
   &--has-event {
-    border: 2px gray solid;
+    border: 2px #fd7e14 solid;
   }
   &:hover {
-    background-color: gray;
+    background-color: #f0ac4e;
     border-radius: 50%;
   }
   user-select: none;

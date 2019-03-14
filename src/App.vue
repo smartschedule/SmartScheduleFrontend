@@ -36,4 +36,8 @@ html {
 .footer {
   align-self: bottom;
 }
+
+body {
+  background-color:#eaecee;
+}
 </style>

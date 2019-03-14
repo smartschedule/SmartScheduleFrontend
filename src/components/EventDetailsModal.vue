@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal :visible="visible" @hidden="$emit('clear')">
+    <b-modal :visible="visible" @hidden="$emit('clear')" title="Event details">
       <b-table stacked :items="[ event ]"/>
       <template slot="modal-footer">
         <b-btn variant="danger" @click="$emit('clear')">Delete</b-btn>
