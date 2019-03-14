@@ -1,7 +1,16 @@
 <template>
   <div class="events">
-    <div class="header">{{dateHeader}}</div>
-    <div class="foo">
+    <div class="header">
+      <b-container>
+        <b-row align-h="between">
+          <b-col cols="auto">{{dateHeader}}</b-col>
+          <b-col cols="auto">
+            <b-btn size="sm" variant="success" @click="$emit('addevent')">Add Event</b-btn>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
+    <div class="foo mt-2 border-top border-bottom">
       <div class="timeline">
         <div v-for="x in twentyFour" :key="x">{{x}}</div>
       </div>
@@ -9,22 +18,33 @@
         <div
           class="event"
           v-for="{id, name, from, to, color} in events"
-          :key="{id}"
-          :style="`height: ${(to-from)*25}px; background-color: rgba(${color.r}, ${color.g}, ${color.b}, 0.6); margin-top: ${from*25}px`"
+          :key="id"
+          @click="selectedEvent={name,from,to,color}"
+          :style="`height: ${(to-from)*25}px; background-color: ${color}5a; margin-top: ${from*25}px;`"
         >
-          <span
-            :style="`background-color: rgba(${color.r}, ${color.g}, ${color.b}, 1)`"
-            class="event-thing"
-          >aaa</span>
+          <span :style="`background-color: ${color}`" class="event-thing">aaa</span>
           <span class="event-text">{{name}}</span>
         </div>
       </div>
     </div>
+    <EventDetails
+      :event="selectedEvent"
+      :visible="!isEqualInstance(selectedEvent, {})"
+      @clear="selectedEvent={}"
+    />
   </div>
 </template>
 
 <script>
+import EventDetails from "./EventDetailsModal.vue";
+import { isEqual } from "lodash";
 export default {
+  data() {
+    return {
+      selectedEvent: {}
+    };
+  },
+  components: { EventDetails },
   props: {
     events: {
       type: Array,
@@ -48,23 +68,27 @@ export default {
     twentyFour() {
       return [...Array(24).keys()].map(x => `${x}:00`);
     }
+  },
+  methods: {
+    isEqualInstance(x, y) {
+      return isEqual(x, y);
+    }
   }
 };
 </script>
 
 <style lang="scss">
 .events {
-  width: 600px;
+  width: 100%;
   height: 100%;
-  background: white;
   padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 40px;
 }
 .foo {
   display: flex;
   flex-direction: row;
-  color: rgba(0, 0, 0, 0.3);
 }
 .header {
   font-weight: 800;
@@ -73,10 +97,15 @@ export default {
 .time {
   position: relative;
   margin-left: 10px;
+  width: 100%;
 }
 .timeline {
   position: relative;
-  width: 10px;
+  width: 50px;
+  text-align: right;
+  user-select: none;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.3);
 }
 .event {
   font-size: 100%;
