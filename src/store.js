@@ -14,8 +14,15 @@ export default new Vuex.Store({
     setUserInfo(state, payload) {
       state.userInfo = payload.userInfo;
     },
+    dropUserInfo(state, payload) {
+      state.userInfo = null;
+      localStorage.removeItem('token');
+    },
   },
   actions: {
+    dropToken({ commit }) {
+      commit({ type: 'dropUserInfo' });
+    },
     async setToken({ state: { token }, commit }) {
       const userInfo = await getUserDetails();
       commit({ type: 'setUserInfo', userInfo });
