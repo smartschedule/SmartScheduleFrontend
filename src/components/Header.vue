@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="primary" sticky="true">
+  <b-navbar toggleable="lg" type="dark" variant="primary" sticky>
     <b-navbar-brand tag="h1" class="mb-0" to="/">SmartSchedule</b-navbar-brand>
 
     <b-navbar-toggle target="nav_collapse"/>
@@ -7,10 +7,10 @@
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
         <b-nav-item to="/calendars">Calendars</b-nav-item>
-        <b-nav-item to="/friends">Friends</b-nav-item>
+        <b-nav-item to="/buddies">Friends</b-nav-item>
       </b-navbar-nav>
       <CurrentUserInfo/>
-    </b-nav>
+    </b-collapse>
   </b-navbar>
 </template>
 
