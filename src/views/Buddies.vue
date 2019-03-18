@@ -5,8 +5,7 @@
         <b-tab title="Friends">
           <b-table :items="buddies" v-bind="tableCommon">
             <template slot="options" slot-scope="row">
-              <b-btn variant="success" size="sm" class="m-1">Accept</b-btn>
-              <b-btn variant="danger" size="sm">Reject</b-btn>
+              <b-btn variant="danger" size="sm">Remove</b-btn>
             </template>
           </b-table>
         </b-tab>
@@ -67,8 +66,8 @@ export default {
   },
   async mounted() {
     let buddies = await getFriendsList();
-    let receivedBuddyRequests = await getCurrentUsersFriendRequests();
-    let sentBuddyRequests = await getPendingUserFriendRequests();
+    let receivedBuddyRequests = await getPendingUserFriendRequests();
+    let sentBuddyRequests = await getCurrentUsersFriendRequests();
     let blockedUsers = await getBlockedUsers();
     this.buddies = buddies;
     this.receivedBuddyRequests = receivedBuddyRequests;
