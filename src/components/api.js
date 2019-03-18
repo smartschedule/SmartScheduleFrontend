@@ -30,5 +30,24 @@ export const getPendingUserFriendRequests = async () =>
 export const getBlockedUsers = async () =>
   (await api.get('user/getBlockedUsers')).data.users;
 
+//friends
+
+export const acceptFriend = async id =>
+  await api.post('user/acceptFriendRequest', id, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+export const createFriendRequest = async id =>
+  await api.post('user/friendRequest', id);
+export const rejectFriend = async id =>
+  await api.post('user/rejectFriendRequest', id);
+export const removeFriend = async id => {
+  console.log(id);
+  await api.post('user/removeFriend', id, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+};
+export const blockUser = async id => (await api.post('user/blockUser'), id);
+export const unblockUser = async id => (await api.post('user/unblockUser'), id);
 export const getEvents = calendarId => api.get('getEvents', { calendarId });
 export const deleteEvent = id => api.delete('deleteEvent', { id });

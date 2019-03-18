@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import { getToken } from '$c/token';
+import { getToken, removeToken } from '$c/token';
 import { getUserDetails } from '$c/api';
 export default new Vuex.Store({
   state: {
@@ -16,7 +16,8 @@ export default new Vuex.Store({
     },
     dropUserInfo(state, payload) {
       state.userInfo = null;
-      localStorage.removeItem('token');
+      state.token = null;
+      removeToken();
     },
   },
   actions: {

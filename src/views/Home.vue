@@ -17,8 +17,8 @@
             container.
           </p>
 
-          <b-button variant="primary" href="#">Login</b-button>
-          <b-button variant="success" href="#">Create account</b-button>
+          <b-button variant="primary" href="#/login">Login</b-button>
+          <b-button variant="success" href="#/register">Create account</b-button>
         </b-jumbotron>
       </b-col>
     </b-row>
