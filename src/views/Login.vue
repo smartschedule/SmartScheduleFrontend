@@ -2,7 +2,7 @@
   <div class="register">
     <div class="register__wrapper">
       <div class="error">{{message}}</div>
-      <div v-if="token">You are already logged in</div>
+      <div v-if="userInfo">You are already logged in</div>
       <b-form v-else>
         <b-form-group description="example: you@gmail.com" label="E-mail" label-for="login-email">
           <b-form-input
@@ -36,7 +36,6 @@ import { getToken, setToken, tokenToStore } from "$c/token";
 export default {
   data() {
     return {
-      token: getToken(),
       username: "",
       password: "",
       message: ""
@@ -44,6 +43,11 @@ export default {
   },
   mounted() {
     this.$refs.email.focus();
+  },
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo;
+    }
   },
   methods: {
     async loginClick() {

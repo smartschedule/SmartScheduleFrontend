@@ -4,8 +4,12 @@
       <b-tabs>
         <b-tab title="Friends">
           <b-table :items="buddies" v-bind="tableCommon">
-            <template slot="options" slot-scope="row">
-                    <b-btn variant="danger" size="sm">Remove</b-btn>
+            <template slot="options" slot-scope="{item: {id}}">
+              <b-btn
+                variant="danger"
+                size="sm"
+                @click=" removeFriend(id); buddies = removeFrom(buddies, id)"
+              >Remove</b-btn>
             </template>
           </b-table>
         </b-tab>
@@ -14,16 +18,29 @@
         </b-tab>
         <b-tab title="Received requests">
           <b-table :items="receivedBuddyRequests" v-bind="tableCommon">
-            <template slot="options" slot-scope="row">
-              <b-btn variant="success" size="sm" class="m-1">Accept</b-btn>
-              <b-btn variant="danger" size="sm">Reject</b-btn>
+            <template slot="options" slot-scope="{item: {id}}">
+              <b-btn
+                variant="success"
+                size="sm"
+                class="m-1"
+                @click="() => {acceptFriend(id); receivedBuddyRequests=removeFrom(receivedBuddyRequests, id );}"
+              >Accept</b-btn>
+              <b-btn
+                variant="danger"
+                size="sm"
+                @click="() => {rejectFriend(id); receiveBuddyRequests = removeFrom(receivedBuddyRequests=removeFrom(receivedBuddyRequests, id))}"
+              >Reject</b-btn>
             </template>
           </b-table>
         </b-tab>
         <b-tab title="Blocked">
           <b-table :items="blockedUsers" v-bind="tableCommon">
-            <template slot="options" slot-scope="row">
-              <b-btn variant="danger" size="sm">Unblock</b-btn>
+            <template slot="options" slot-scope="{item:{id}}">
+              <b-btn
+                variant="danger"
+                size="sm"
+                @click="() => {unblockUser(id); blockedUsers = removeFrom(blockedUsers, id)}  "
+              >Unblock</b-btn>
             </template>
           </b-table>
           <b-input placeholder="Search users to block"></b-input>
@@ -44,7 +61,13 @@ import {
   getFriendsList,
   getCurrentUsersFriendRequests,
   getPendingUserFriendRequests,
-  getBlockedUsers
+  getBlockedUsers,
+  acceptFriend,
+  rejectFriend,
+  createFriendRequest,
+  blockUser,
+  unblockUser,
+  removeFriend
 } from "$c/api";
 export default {
   data() {
@@ -60,7 +83,7 @@ export default {
     tableCommon() {
       return {
         "show-empty": true,
-        fields: ["email", "options"]
+        fields: ["email", "options", "id"]
       };
     }
   },
@@ -73,6 +96,18 @@ export default {
     this.receivedBuddyRequests = receivedBuddyRequests;
     this.sentBuddyRequests = sentBuddyRequests;
     this.blockedUsers = blockedUsers;
+  },
+  methods: {
+    removeFriend(id) {
+      removeFriend(id);
+    },
+    async acceptFriend(id) {
+      acceptFriend(id);
+      this.buddies = await getFriendsList();
+    },
+    removeFrom(array, id) {
+      return array.filter(x => x.id !== id);
+    }
   }
 };
 </script>

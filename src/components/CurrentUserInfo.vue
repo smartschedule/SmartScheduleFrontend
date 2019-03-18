@@ -3,7 +3,7 @@
   <b-navbar-nav class="ml-auto">
     <b-navbar-nav v-if="userInfo">
       <b-nav-item to="/profile">{{userInfo.userName}}</b-nav-item>
-      <b-nav-item to="/logout">Logout</b-nav-item>
+      <b-nav-item @click="() => {this.$store.dispatch('dropToken')}">Logout</b-nav-item>
     </b-navbar-nav>
     <b-navbar-nav v-else>
       <b-nav-item to="/login">Login</b-nav-item>
