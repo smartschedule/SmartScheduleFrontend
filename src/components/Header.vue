@@ -7,7 +7,7 @@
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
         <b-nav-item to="/calendars">Calendars</b-nav-item>
-        <b-nav-item to="/buddies">Friends</b-nav-item>
+        <b-nav-item to="/friends">Friends</b-nav-item>
       </b-navbar-nav>
       <CurrentUserInfo/>
     </b-collapse>
