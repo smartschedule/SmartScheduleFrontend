@@ -3,7 +3,7 @@
     <div class="container-login100">
       <div class="wrap-login100 px-5 py-5">
         <form class="login100-form validate-form flex-sb flex-w px-4 py-2">
-          <span class="login100-form-title pb-5">Register</span>
+          <span class="login100-form-title pb-5">Register account</span>
           
           <span class="txt1 pb-2">Username</span>
            <!-- <span class="txt1 pb-2">

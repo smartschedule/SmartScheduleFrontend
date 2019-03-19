@@ -85,7 +85,7 @@
             </div>
 
             <div>
-              <a href="#" class="txt3">Forgot Password?</a>
+              <a href="#/forgotten-password" class="txt3">Forgot Password?</a>
             </div>
           </div>
 
