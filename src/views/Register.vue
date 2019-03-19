@@ -1,24 +1,89 @@
 <template>
-  <div class="register">
-    <div class="register__wrapper">
-      <div class="error">{{message}}</div>
-      <div v-if="disabled">Passwords do not match</div>
-      <b-form>
-        <b-form-group description="example: me@gmail.com" label="E-mail">
-          <b-form-input v-model="email" placeholder="Enter e-mail" ref="email"/>
-        </b-form-group>
-        <b-form-group label="Username">
-          <b-form-input type="text" v-model="username" placeholder="Enter username"/>
-        </b-form-group>
-        <b-form-group label="Password">
-          <b-form-input type="password" v-model="password" placeholder="Enter password"/>
-          <b-form-input type="password" class="mt-2" v-model="confirmpassword" placeholder="Repeat password"/>
-        </b-form-group>
-        <b-btn class="mt-3" :disabled="disabled" @click="onRegisterClick" variant="success">Register</b-btn>
-      </b-form>
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100 px-5 py-5">
+        <form class="login100-form validate-form flex-sb flex-w px-4 py-2">
+          <span class="login100-form-title pb-5">Register</span>
+          
+          <span class="txt1 pb-2">Username</span>
+           <!-- <span class="txt1 pb-2">
+            <div class="error">{{message}}</div>
+          </span> -->
+          <div
+            class="wrap-input100 validate-input mb-4"
+            v-bind:class="[validateError ? 'alertValidate' : '']"
+            data-validate="Username is incorrect"
+          >
+            <input
+              class="input100"
+              id="login-email"
+              type="text"
+              v-model="username"
+            >
+            <span class="focus-input100"></span>
+          </div>
+
+          <span class="txt1 pb-2">e-mail</span>
+
+          <div
+            class="wrap-input100 validate-input mb-4"
+            v-bind:class="[emailInUse ? 'alertValidate' : '']"
+            data-validate="e-mail in use"
+          >
+            <input
+              class="input100"
+              id="login-email"
+              type="text"
+              v-model="email"
+              ref="email"
+            >
+            <span class="focus-input100"></span>
+          </div>
+
+          <span class="txt1 pb-2">Password</span>
+          <div
+            class="wrap-input100 validate-input mb-3"
+            v-bind:class="[disabled ? 'alertValidate' : '']"
+            data-validate="Passwords does not match"
+          >
+            <span class="btn-show-pass">
+              <i class="fa fa-eye"></i>
+            </span>
+            <input
+              class="input100"
+              type="password"
+              v-model="password"
+            >
+            <span class="focus-input100"></span>
+          </div>
+
+          <span class="txt1 pb-2">Repeat password</span>
+          <div
+            class="wrap-input100 validate-input mb-3"
+            v-bind:class="[disabled ? 'alertValidate' : '']"
+            data-validate="Passwords does not match"
+          >
+            <span class="btn-show-pass">
+              <i class="fa fa-eye"></i>
+            </span>
+            <input
+              class="input100"
+              type="password"
+              v-model="confirmpassword"
+            >
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="container-login100-form-btn pt-3">
+            <b-btn class="login100-form-btn" :disabled="disabled" variant="success" @click="onRegisterClick">Register</b-btn>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
+
+
 
 <script>
 import { register } from "$c/api";
@@ -31,7 +96,8 @@ export default {
       email: "",
       password: "",
       confirmpassword: "",
-      message: ""
+      message: "",
+      emailInUse: false
     };
   },
   mounted() {
@@ -47,6 +113,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.message = "Email already in use";
+        this.emailInUse = true;
       }
     }
   },
@@ -70,4 +137,6 @@ export default {
 input {
   display: block;
 }
+
+@import "./loginRegisterForm.scss";
 </style>

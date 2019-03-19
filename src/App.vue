@@ -17,6 +17,30 @@ export default {
 };
 </script>
 <style lang="scss">
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url("./fonts/poppins/Poppins-Regular.ttf");
+}
+
+
+@font-face {
+  font-family: FontAwesome;
+  src: url("./fonts/fontawesome-webfont.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url("./fonts/poppins/Poppins-Bold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url("./fonts/poppins/Poppins-Medium.ttf");
+}
+
 html {
   min-height: 100%;
 }
@@ -38,6 +62,6 @@ html {
 }
 
 body {
-  background-color:#eaecee;
+  background-color: #eaecee;
 }
 </style>
