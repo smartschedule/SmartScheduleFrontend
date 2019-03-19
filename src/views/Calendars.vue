@@ -1,9 +1,11 @@
 <template>
   <b-container fluid>
-    <b-row align-v="center" class="my-3">
-      <b-col>
+    <b-row class="mt-3">
+      <b-col sm="3" lg="2" class="row-equal">
+            <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'xd', id: 5}]" />
+      </b-col>
+      <b-col sm="9" lg="10" class="pl-sm-0">
           <div class="d-flex">
-            <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'xd', id: 5}]" class="mr-3"/>
             <Calendar :events="events" @addevent="() => addEventsVisible = true"/>
           </div>
           <AddEvent @close="()=>addEventsVisible=false" :visible="addEventsVisible"/>
@@ -31,4 +33,16 @@ export default {
 </script>
 
 <style lang="scss">
+@media (min-width: 768px) {
+  .row-equal {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 575px) { 
+  [class*="col-"]:not(:first-child){
+      margin-top: 15px;
+  }
+}
 </style>

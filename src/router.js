@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Calendars from './views/Calendars.vue';
 import Register from './views/Register.vue';
 import Login from './views/Login.vue';
+import ForgottenPassword from './views/ForgottenPassword.vue';
 import Friends from './views/Buddies.vue';
 
 Vue.use(Router);
@@ -29,6 +30,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/forgotten-password',
+      name: 'forgottenPassword',
+      component: ForgottenPassword,
     },
     {
       path: '/friends',

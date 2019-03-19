@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-picker">
+  <div class="calendar-picker px-4 py-3">
     <div class="mb-3">
       <b>Calendars</b>
       <b-btn size="sm" variant="success" class="ml-2" @click="isAddVisible=true">Add</b-btn>
@@ -41,8 +41,8 @@ export default {
 .calendar-picker {
   display: inline-block;
   text-align-last: left;
-  padding: 20px;
-  width: 200px;
+  //padding: 20px;
+  width: 100%;
   background-color: white;
   &__calendar {
     cursor: pointer;
