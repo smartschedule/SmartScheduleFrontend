@@ -1,7 +1,19 @@
 <template>
   <b-container>
-    <b-col>
+    <b-col v-if="$store.state.userInfo">
       <b-tabs>
+        <b-tab title="Friend Search">
+          <b-input v-model="friendSearch" placeholder="Search friends"/>
+          <b-table :items="foundFriends" v-bind="tableCommon">
+            <template slot="options" slot-scope="{item: {id}}">
+              <b-btn
+                variant="success"
+                size="sm"
+                @click="createFriendRequest(id); allUsers = removeFrom(allUsers, id)"
+              >Add</b-btn>
+            </template>
+          </b-table>
+        </b-tab>
         <b-tab title="Friends">
           <b-table :items="buddies" v-bind="tableCommon">
             <template slot="options" slot-scope="{item: {id}}">
@@ -13,10 +25,10 @@
             </template>
           </b-table>
         </b-tab>
-        <b-tab title="Sent requests">
+        <b-tab title="Sent">
           <b-table :items="sentBuddyRequests" v-bind="tableCommon"></b-table>
         </b-tab>
-        <b-tab title="Received requests">
+        <b-tab title="Received">
           <b-table :items="receivedBuddyRequests" v-bind="tableCommon">
             <template slot="options" slot-scope="{item: {id}}">
               <b-btn
@@ -45,6 +57,18 @@
           </b-table>
           <b-input placeholder="Search users to block"></b-input>
         </b-tab>
+        <b-tab title="Blocked Search">
+          <b-input v-model="friendSearch" placeholder="Search friends"/>
+          <b-table :items="foundFriends" v-bind="tableCommon">
+            <template slot="options" slot-scope="{item: {id}}">
+              <b-btn
+                variant="danger"
+                size="sm"
+                @click="blockeUser(id); allUsers = removeFrom(allUsers, id)"
+              >Block</b-btn>
+            </template>
+          </b-table>
+        </b-tab>
       </b-tabs>
       <b-modal v-if="selectedBuddy" :visible="!!selectedBuddy" @hidden="selectedBuddy=null">
         {{selectedBuddy.name}}
@@ -53,6 +77,7 @@
         </template>
       </b-modal>
     </b-col>
+    <div v-else>Please log in</div>
   </b-container>
 </template>
 
@@ -67,11 +92,14 @@ import {
   createFriendRequest,
   blockUser,
   unblockUser,
-  removeFriend
+  removeFriend,
+  getAllUsers
 } from "$c/api";
 export default {
   data() {
     return {
+      friendSearch: "",
+      allUsers: [],
       buddies: [],
       receivedBuddyRequests: [],
       sentBuddyRequests: [],
@@ -80,10 +108,29 @@ export default {
     };
   },
   computed: {
+    foundFriends() {
+      const {
+        sentBuddyRequests,
+        receivedBuddyRequests,
+        buddies,
+        allUsers,
+        friendSearch,
+        blockedUsers
+      } = this;
+      const removeThese = [].concat(
+        sentBuddyRequests.map(x => x.id),
+        receivedBuddyRequests.map(x => x.id),
+        buddies.map(x => x.id),
+        blockedUsers.map(x => x.id)
+      );
+      return allUsers.filter(
+        x => removeThese.indexOf(x.id) === -1 && x.email.includes(friendSearch)
+      );
+    },
     tableCommon() {
       return {
         "show-empty": true,
-        fields: ["email", "options", "id"]
+        fields: ["id", "email", "options"]
       };
     }
   },
@@ -96,11 +143,13 @@ export default {
     this.receivedBuddyRequests = receivedBuddyRequests;
     this.sentBuddyRequests = sentBuddyRequests;
     this.blockedUsers = blockedUsers;
+    this.allUsers = await getAllUsers();
   },
   methods: {
-    removeFriend(id) {
-      removeFriend(id);
-    },
+    removeFriend,
+    createFriendRequest,
+    rejectFriend,
+    blockUser,
     async acceptFriend(id) {
       acceptFriend(id);
       this.buddies = await getFriendsList();
