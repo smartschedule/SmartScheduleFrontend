@@ -3,8 +3,6 @@ import axios from 'axios';
 import store from '@/store';
 import { getToken } from '$c/token';
 
-const token = getToken();
-
 const api = axios.create({
   baseURL: 'http://13.80.110.174:80/api/',
 });
@@ -19,6 +17,8 @@ export const register = (userName, email, password) =>
   api.post('register', { userName, email, password });
 
 export const getUserDetails = async () => (await api.get('user/details')).data;
+
+export const getAllUsers = async () => (await api.get('users')).data.users;
 
 export const getCalendars = () => api.get('getCalendars');
 export const getFriendsList = async () =>
@@ -38,16 +38,26 @@ export const acceptFriend = async id =>
   });
 
 export const createFriendRequest = async id =>
-  await api.post('user/friendRequest', id);
+  await api.post('user/friendRequest', id, {
+    headers: { 'Content-Type': 'application/json' },
+  });
 export const rejectFriend = async id =>
-  await api.post('user/rejectFriendRequest', id);
+  await api.post('user/rejectFriendRequest', id, {
+    headers: { 'Content-Type': 'application/json' },
+  });
 export const removeFriend = async id => {
   console.log(id);
   await api.post('user/removeFriend', id, {
     headers: { 'Content-Type': 'application/json' },
   });
 };
-export const blockUser = async id => (await api.post('user/blockUser'), id);
-export const unblockUser = async id => (await api.post('user/unblockUser'), id);
+export const blockUser = async id =>
+  await api.post('user/blockUser', id, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+export const unblockUser = async id =>
+  await api.post('user/unblockUser', id, {
+    headers: { 'Content-Type': 'application/json' },
+  });
 export const getEvents = calendarId => api.get('getEvents', { calendarId });
 export const deleteEvent = id => api.delete('deleteEvent', { id });

@@ -16,6 +16,11 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/calendars',
+      name: 'calendars',
+      component: Calendars,
+    },
+    {
       path: '/register',
       name: 'register',
       component: Register,
