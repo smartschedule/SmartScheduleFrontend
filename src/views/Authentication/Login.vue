@@ -66,13 +66,13 @@
             v-bind:class="[validateError ? 'alertValidate' : '']"
             data-validate="Password is incorrect"
           >
-            <span class="btn-show-pass">
+            <span class="btn-show-pass" @click="switchVisibility">
               <i class="fa fa-eye"></i>
             </span>
             <input
               class="input100"
               autocomplete="current-password"
-              type="password"
+              :type="passwordFieldType"
               v-model="password"
             >
             <span class="focus-input100"></span>
@@ -108,7 +108,8 @@ export default {
       username: "",
       password: "",
       message: "",
-      validateError: false
+      validateError: false,
+      passwordFieldType: 'password'
     };
   },
   mounted() {
@@ -136,6 +137,9 @@ export default {
         this.message = "Login or password incorrect";
         this.validateError = true;
       }
+    },
+    switchVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
     }
   }
 };

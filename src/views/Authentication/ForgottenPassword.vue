@@ -6,8 +6,10 @@
         <div v-if="userInfo">You are already logged in</div>
 
         <form v-else class="login100-form validate-form flex-sb flex-w px-4 py-2">
-          <span class="login100-form-title pb-4">Recover account</span>
-          <p class="pb-4">Enter the email address of the account to which you want to recover access</p>
+          <span class="login100-form-title pb-4">
+            Recover account
+          </span>
+          <p class="pb-4 text-left">Enter the email address of the account to which you want to recover access</p>
           <span class="txt1 pb-2">e-mail</span>
           <div
             class="wrap-input100 validate-input mb-4"
