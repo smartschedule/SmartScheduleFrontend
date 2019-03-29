@@ -19,7 +19,7 @@
           </span>
           <div
             class="wrap-input100 mb-3">
-            <span class="btn-show-pass"  @click="switchVisibility">
+            <span class="btn-show-pass" @click="switchVisibility">
               <i class="fa fa-eye"></i>
             </span>
             <input class="input100" :type="passwordFieldType" v-model="password">

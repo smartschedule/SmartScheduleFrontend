@@ -25,7 +25,22 @@ export default new Router({
       component: Calendars,
     },
     {
-      path: '/register',
+      path: '/calendars/day',
+      name: 'calendarDay',
+      component: Calendars,
+    },
+    {
+      path: '/calendars/week',
+      name: 'calendarWeek',
+      component: Calendars,
+    },
+    {
+      path: '/calendars/month',
+      name: 'calendarMonth',
+      component: Calendars,
+    },
+    {
+      path: '/register/month',
       name: 'register',
       component: Register,
     },

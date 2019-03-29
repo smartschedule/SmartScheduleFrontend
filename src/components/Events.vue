@@ -4,12 +4,18 @@
       <b-container>
         <b-row align-h="between">
           <b-col cols="auto" class="mt-1">{{dateHeader}}</b-col>
-              <i class="fa fa-eye"></i>
           <b-col cols="auto">
             <b-button-group>
               <b-dropdown size="sm" right variant="warning" text="View">
-                <b-dropdown-item>Day</b-dropdown-item>
-                <b-dropdown-item>Week</b-dropdown-item>
+                <b-dropdown-item @click="$router.push({'name': 'calendarDay'})">
+                  <i class="fas fa-calendar-day"></i> Day
+                </b-dropdown-item>
+                <b-dropdown-item @click="$router.push({'name': 'calendarWeek'})">
+                  <i class="fas fa-calendar-week"></i> Week
+                </b-dropdown-item>
+                <b-dropdown-item @click="$router.push({'name': 'calendarMonth'})">
+                  <i class="fas fa-calendar-alt"></i> Month
+                </b-dropdown-item>
               </b-dropdown>
               <b-btn size="sm" variant="success" @click="$emit('addevent')">Add Event</b-btn>
             </b-button-group>
