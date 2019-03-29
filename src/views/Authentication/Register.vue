@@ -2,24 +2,20 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100 px-5 py-5">
-        <form class="login100-form validate-form flex-sb flex-w px-4 py-2">
+        <div v-if="userInfo">You are already logged in</div>
+
+        <form v-else class="login100-form validate-form flex-sb flex-w px-4 py-2">
           <span class="login100-form-title pb-5">Register account</span>
-          
+
           <span class="txt1 pb-2">Username</span>
-           <!-- <span class="txt1 pb-2">
+          <!-- <span class="txt1 pb-2">
             <div class="error">{{message}}</div>
-          </span> -->
+          </span>-->
           <div
             class="wrap-input100 validate-input mb-4"
             v-bind:class="[validateError ? 'alertValidate' : '']"
-            data-validate="Username is incorrect"
-          >
-            <input
-              class="input100"
-              id="login-email"
-              type="text"
-              v-model="username"
-            >
+            data-validate="Username is incorrect">
+            <input class="input100" id="login-email" type="text" v-model="username">
             <span class="focus-input100"></span>
           </div>
 
@@ -28,15 +24,8 @@
           <div
             class="wrap-input100 validate-input mb-4"
             v-bind:class="[emailInUse ? 'alertValidate' : '']"
-            data-validate="e-mail in use"
-          >
-            <input
-              class="input100"
-              id="login-email"
-              type="text"
-              v-model="email"
-              ref="email"
-            >
+            data-validate="e-mail in use">
+            <input class="input100" id="login-email" type="text" v-model="email" ref="email">
             <span class="focus-input100"></span>
           </div>
 
@@ -44,16 +33,11 @@
           <div
             class="wrap-input100 validate-input mb-3"
             v-bind:class="[disabled ? 'alertValidate' : '']"
-            data-validate="Passwords does not match"
-          >
+            data-validate="Passwords does not match">
             <span class="btn-show-pass">
               <i class="fa fa-eye"></i>
             </span>
-            <input
-              class="input100"
-              type="password"
-              v-model="password"
-            >
+            <input class="input100" type="password" v-model="password">
             <span class="focus-input100"></span>
           </div>
 
@@ -61,21 +45,21 @@
           <div
             class="wrap-input100 validate-input mb-3"
             v-bind:class="[disabled ? 'alertValidate' : '']"
-            data-validate="Passwords does not match"
-          >
+            data-validate="Passwords does not match">
             <span class="btn-show-pass">
               <i class="fa fa-eye"></i>
             </span>
-            <input
-              class="input100"
-              type="password"
-              v-model="confirmpassword"
-            >
+            <input class="input100" type="password" v-model="confirmpassword">
             <span class="focus-input100"></span>
           </div>
 
           <div class="container-login100-form-btn pt-3">
-            <b-btn class="login100-form-btn" :disabled="disabled" variant="success" @click="onRegisterClick">Register</b-btn>
+            <b-btn
+              class="login100-form-btn"
+              :disabled="disabled"
+              variant="success"
+              @click="onRegisterClick"
+            >Register</b-btn>
           </div>
         </form>
       </div>
