@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     <Header/>
     <router-view class="router-view"/>
     <Footer class="footer"/>

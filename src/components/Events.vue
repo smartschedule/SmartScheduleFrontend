@@ -3,9 +3,16 @@
     <div class="header">
       <b-container>
         <b-row align-h="between">
-          <b-col cols="auto">{{dateHeader}}</b-col>
+          <b-col cols="auto" class="mt-1">{{dateHeader}}</b-col>
+              <i class="fa fa-eye"></i>
           <b-col cols="auto">
-            <b-btn size="sm" variant="success" @click="$emit('addevent')">Add Event</b-btn>
+            <b-button-group>
+              <b-dropdown size="sm" right variant="warning" text="View">
+                <b-dropdown-item>Day</b-dropdown-item>
+                <b-dropdown-item>Week</b-dropdown-item>
+              </b-dropdown>
+              <b-btn size="sm" variant="success" @click="$emit('addevent')">Add Event</b-btn>
+            </b-button-group>
           </b-col>
         </b-row>
       </b-container>
@@ -81,7 +88,7 @@ export default {
 .events {
   width: 100%;
   height: 100%;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 40px;
