@@ -4,14 +4,16 @@
       <b>Calendars</b>
       <b-btn size="sm" variant="success" class="ml-2" @click="isAddVisible=true">Add</b-btn>
     </div>
-    <div
-      v-for="{name, id} in calendars"
-      :key="id"
-      @click="$emit('input', id)"
-      class="calendar-picker__calendar"
-      :class="{'calendar-picker__calendar--picked': value===id}"
-    >{{name}}</div>
-    <AddCalendar :visible="isAddVisible" @hidden="isAddVisible=false"/>
+
+    <b-list-group>
+      <b-list-group-item
+        v-for="{name, id} in calendars"
+        :key="id"
+        @click="$emit('input', id)"
+        class="calendar-picker__calendar"
+        :class="{'active': value===id}">{{name}}</b-list-group-item>
+      <AddCalendar :visible="isAddVisible" @hidden="isAddVisible=false"/>
+    </b-list-group>
   </div>
 </template>
 
@@ -48,18 +50,8 @@ export default {
     cursor: pointer;
     padding: 5px;
     border-bottom: 1px solid lightgrey;
-    &:hover:not(&--picked) {
-      background: lightgray;
-      transition: background 0.2s ease-in-out;
-    }
-    &--picked {
-      cursor: default;
-      background-color: #605f6f;
-      color: whitesmoke;
-    }
     &::before {
       margin-right: 5px;
-      content: "•";
     }
   }
 }

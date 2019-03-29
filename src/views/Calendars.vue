@@ -2,7 +2,7 @@
   <b-container fluid>
     <b-row class="mt-3">
       <b-col sm="3" lg="2" class="row-equal">
-            <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'xd', id: 5}]" />
+            <CalendarPicker v-model="selectedCalendarId" :calendars="[{name: 'Test', id: 5}, {name: 'Test2', id: 6}]" />
       </b-col>
       <b-col sm="9" lg="10" class="pl-sm-0">
           <div class="d-flex">

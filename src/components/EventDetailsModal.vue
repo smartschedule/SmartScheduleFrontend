@@ -1,7 +1,24 @@
 <template>
   <div>
     <b-modal :visible="visible" @hidden="$emit('clear')" title="Event details">
-      <b-table stacked :items="[ event ]"/>
+      <b-container class="text-left">
+        <b-row>
+          <b-col>{{event.name}}</b-col>
+        </b-row>
+        <b-row class="mt-3">
+          <b-col>Date: {{event.day}}/{{event.month}}/{{event.year}}</b-col>
+        </b-row>
+        <b-row>
+          <b-col>Time: {{event.from}} - {{event.to}}</b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <div class="badge badge-primary text-wrap">This text should wrap.</div>
+            
+          </b-col>
+        </b-row>
+      </b-container>
+
       <template slot="modal-footer">
         <b-btn variant="danger" @click="$emit('clear')">Delete</b-btn>
       </template>

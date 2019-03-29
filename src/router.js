@@ -10,6 +10,8 @@ import ForgottenPassword from './views/Authentication/ForgottenPassword.vue';
 import ForgottenPasswordReset from './views/Authentication/ForgottenPasswordReset.vue';
 import ForgottenPasswordDone from './views/Authentication/ForgottenPasswordDone.vue';
 
+import UserPanel from './views/User/UserPanel.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -38,6 +40,11 @@ export default new Router({
       path: '/calendars/month',
       name: 'calendarMonth',
       component: Calendars,
+    },
+    {
+      path: '/profile',
+      name: 'user',
+      component: UserPanel,
     },
     {
       path: '/register/month',
