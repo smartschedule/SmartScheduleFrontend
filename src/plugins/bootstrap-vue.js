@@ -2,9 +2,9 @@ import Vue from 'vue'
 
 import BootstrapVue from 'bootstrap-vue'
 
-//import 'bootstrap/dist/css/bootstrap.min.css' 
+import 'bootstrap/dist/css/bootstrap.min.css' 
 //https://bootswatch.com/lux/
-import '../style/bootstrap.min.css'
+import '../style/bootstrap.css'
 //import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)

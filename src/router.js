@@ -47,7 +47,7 @@ export default new Router({
       component: UserPanel,
     },
     {
-      path: '/register/month',
+      path: '/register',
       name: 'register',
       component: Register,
     },
