@@ -1,75 +1,88 @@
 <template>
-  <b-container>
+  <b-container class="mt-4">
     <b-col v-if="$store.state.userInfo">
-      <b-tabs>
-        <b-tab title="Friend Search">
-          <b-input v-model="friendSearch" placeholder="Search friends"/>
-          <b-table :items="foundFriends" v-bind="tableCommon">
-            <template slot="options" slot-scope="{item: {id}}">
-              <b-btn
-                variant="success"
-                size="sm"
-                @click="createFriendRequest(id); allUsers = removeFrom(allUsers, id)"
-              >Add</b-btn>
-            </template>
-          </b-table>
-        </b-tab>
-        <b-tab title="Friends">
-          <b-table :items="buddies" v-bind="tableCommon">
-            <template slot="options" slot-scope="{item: {id}}">
-              <b-btn
-                variant="danger"
-                size="sm"
-                @click=" removeFriend(id); buddies = removeFrom(buddies, id)"
-              >Remove</b-btn>
-            </template>
-          </b-table>
-        </b-tab>
-        <b-tab title="Sent">
-          <b-table :items="sentBuddyRequests" v-bind="tableCommon"></b-table>
-        </b-tab>
-        <b-tab title="Received">
-          <b-table :items="receivedBuddyRequests" v-bind="tableCommon">
-            <template slot="options" slot-scope="{item: {id}}">
-              <b-btn
-                variant="success"
-                size="sm"
-                class="m-1"
-                @click="() => {acceptFriend(id); receivedBuddyRequests=removeFrom(receivedBuddyRequests, id );}"
-              >Accept</b-btn>
-              <b-btn
-                variant="danger"
-                size="sm"
-                @click="() => {rejectFriend(id); receiveBuddyRequests = removeFrom(receivedBuddyRequests=removeFrom(receivedBuddyRequests, id))}"
-              >Reject</b-btn>
-            </template>
-          </b-table>
-        </b-tab>
-        <b-tab title="Blocked">
-          <b-table :items="blockedUsers" v-bind="tableCommon">
-            <template slot="options" slot-scope="{item:{id}}">
-              <b-btn
-                variant="danger"
-                size="sm"
-                @click="() => {unblockUser(id); blockedUsers = removeFrom(blockedUsers, id)}  "
-              >Unblock</b-btn>
-            </template>
-          </b-table>
-          <b-input placeholder="Search users to block"></b-input>
-        </b-tab>
-        <b-tab title="Blocked Search">
-          <b-input v-model="friendSearch" placeholder="Search friends"/>
-          <b-table :items="foundFriends" v-bind="tableCommon">
-            <template slot="options" slot-scope="{item: {id}}">
-              <b-btn
-                variant="danger"
-                size="sm"
-                @click="blockeUser(id); allUsers = removeFrom(allUsers, id)"
-              >Block</b-btn>
-            </template>
-          </b-table>
-        </b-tab>
-      </b-tabs>
+      <div>
+        <!-- Tabs with card integration -->
+        <b-card no-body>
+          <b-tabs small card>
+
+            <b-tab title="Friend Search">             
+              <b-input v-model="friendSearch" placeholder="Search friends"/>
+              <b-table small outlined responsive striped hover :items="foundFriends" v-bind="tableCommon">
+                <template slot="options" slot-scope="{item: {id}}">
+                  <b-btn
+                    variant="success"
+                    size="sm"
+                    @click="createFriendRequest(id); allUsers = removeFrom(allUsers, id)"
+                  >Add</b-btn>
+                </template>
+              </b-table>
+            </b-tab>
+
+            <b-tab title="Friends">
+              <b-table small outlined responsive striped hover :items="buddies" v-bind="tableCommon">
+                <template slot="options" slot-scope="{item: {id}}">
+                  <b-btn
+                    variant="danger"
+                    size="sm"
+                    @click=" removeFriend(id); buddies = removeFrom(buddies, id)"
+                  >Remove</b-btn>
+                </template>
+              </b-table>
+            </b-tab>
+
+            <b-tab title="Sent">
+              <b-table small outlined responsive striped hover :items="sentBuddyRequests" v-bind="tableCommon"></b-table>
+            </b-tab>
+
+            <b-tab title="Received">
+              <b-table small outlined responsive striped hover :items="receivedBuddyRequests" v-bind="tableCommon">
+                <template slot="options" slot-scope="{item: {id}}">
+                  <b-btn
+                    variant="success"
+                    size="sm"
+                    class="m-1"
+                    @click="() => {acceptFriend(id); receivedBuddyRequests=removeFrom(receivedBuddyRequests, id );}"
+                  >Accept</b-btn>
+                  <b-btn
+                    variant="danger"
+                    size="sm"
+                    @click="() => {rejectFriend(id); receiveBuddyRequests = removeFrom(receivedBuddyRequests=removeFrom(receivedBuddyRequests, id))}"
+                  >Reject</b-btn>
+                </template>
+              </b-table>
+            </b-tab>
+
+            <b-tab title="Blocked">
+              <b-table small outlined responsive striped hover :items="blockedUsers" v-bind="tableCommon">
+                <template slot="options" slot-scope="{item:{id}}">
+                  <b-btn
+                    variant="danger"
+                    size="sm"
+                    @click="() => {unblockUser(id); blockedUsers = removeFrom(blockedUsers, id)}  "
+                  >Unblock</b-btn>
+                </template>
+              </b-table>
+              <b-input placeholder="Search users to block"></b-input>
+            </b-tab>
+
+            <b-tab title="Blocked Search">
+              <b-input v-model="friendSearch" placeholder="Search friends"/>
+              <b-table small outlined responsive striped hover :items="foundFriends" v-bind="tableCommon">
+                <template slot="options" slot-scope="{item: {id}}">
+                  <b-btn
+                    variant="danger"
+                    size="sm"
+                    @click="blockeUser(id); allUsers = removeFrom(allUsers, id)"
+                  >Block</b-btn>
+                </template>
+              </b-table>
+            </b-tab>
+
+          </b-tabs>
+        </b-card>
+      </div>
+
       <b-modal v-if="selectedBuddy" :visible="!!selectedBuddy" @hidden="selectedBuddy=null">
         {{selectedBuddy.name}}
         <template slot="modal-footer">
@@ -130,7 +143,28 @@ export default {
     tableCommon() {
       return {
         "show-empty": true,
-        fields: ["id", "email", "options"]
+        fields: [
+          {
+            key: 'id',
+            label: 'ID',
+            sortable: true
+          },
+          {
+            key: 'name',
+            label: 'Full name',
+            sortable: true
+          },
+          {
+            key: 'email',
+            label: 'e-mail',
+            sortable: true
+          },
+          {
+            key: 'options',
+            label: 'Actions',
+            sortable: false
+          }
+        ]
       };
     }
   },
