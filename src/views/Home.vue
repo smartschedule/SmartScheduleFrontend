@@ -16,9 +16,10 @@
             It uses utility classes for typography and spacing to space content out within the larger
             container.
           </p>
-
-          <b-button variant="primary" href="#/login">Login</b-button>
-          <b-button variant="success" href="#/register">Create account</b-button>
+          <b-button-group>
+            <b-button variant="primary" href="#/login">Login</b-button>
+            <b-button variant="success" href="#/register">Create account</b-button>
+          </b-button-group>
         </b-jumbotron>
       </b-col>
     </b-row>
