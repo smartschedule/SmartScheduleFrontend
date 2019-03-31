@@ -7,7 +7,7 @@
           <b-tabs small card>
 
             <b-tab title="Friend Search">             
-              <b-input v-model="friendSearch" placeholder="Search friends"/>
+              <b-input v-model="friendSearch" class="mb-2" placeholder="Search friends"/>
               <b-table small outlined responsive striped hover :items="foundFriends" v-bind="tableCommon">
                 <template slot="options" slot-scope="{item: {id}}">
                   <b-btn
@@ -54,6 +54,8 @@
             </b-tab>
 
             <b-tab title="Blocked">
+              <b-input class="mb-2" placeholder="Search users to block"></b-input>
+
               <b-table small outlined responsive striped hover :items="blockedUsers" v-bind="tableCommon">
                 <template slot="options" slot-scope="{item:{id}}">
                   <b-btn
@@ -63,11 +65,10 @@
                   >Unblock</b-btn>
                 </template>
               </b-table>
-              <b-input placeholder="Search users to block"></b-input>
             </b-tab>
 
             <b-tab title="Blocked Search">
-              <b-input v-model="friendSearch" placeholder="Search friends"/>
+              <b-input v-model="friendSearch" class="mb-2" placeholder="Search friends"/>
               <b-table small outlined responsive striped hover :items="foundFriends" v-bind="tableCommon">
                 <template slot="options" slot-scope="{item: {id}}">
                   <b-btn
