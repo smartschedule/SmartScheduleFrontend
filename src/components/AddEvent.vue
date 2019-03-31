@@ -1,12 +1,21 @@
 <template>
-  <b-modal :visible="visible" @hidden="$emit('close')" ok-only title="Add event">Event name
-    <b-input type="text" placeholder="Event name (eg. John's birthday)"/>Event date
-    <b-input type="date" placeholder="Event date"/>Event duration
-    <div class="splitter">From
-      <b-input class="inline" type="time"/>To
+  <b-modal :visible="visible" @hidden="$emit('close')" ok-only title="Add event" class="text-left">
+    <span class="font-weight-bold">Event name:</span>
+    <b-input class="mb-3" type="text" placeholder="Event name (eg. John's birthday)"/>
+
+    <span class="font-weight-bold">Event date:</span>
+    <b-input class="mb-3" type="date" placeholder="Event date"/>
+
+    <span class="font-weight-bold">Event duration:</span>
+    <div class="splitter mb-3">
+      <span class="font-weight-normal">From:</span>
       <b-input class="inline" type="time"/>
-    </div>Event color
-    <b-input type="color"/>
+      <span class="font-weight-normal">To:</span>
+      <b-input class="inline" type="time"/>
+    </div>
+    
+    <span class="font-weight-bold">Event color:</span>
+    <b-input class="mb-3" type="color"/>
   </b-modal>
 </template>
 

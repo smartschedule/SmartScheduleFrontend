@@ -3992,7 +3992,7 @@ input[type="button"].btn-block {
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(26, 26, 26, 0.5);
 }
-
+/* 
 .custom-select {
   display: inline-block;
   width: 100%;
@@ -4053,7 +4053,7 @@ input[type="button"].btn-block {
   padding-bottom: 2rem;
   padding-left: 3rem;
   font-size: 1.09375rem;
-}
+} */
 
 .custom-file {
   position: relative;
