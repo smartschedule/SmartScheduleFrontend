@@ -96,7 +96,7 @@ export default {
         await register(username, email, password);
         this.$router.push({ path: "login" });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         this.message = "Email already in use";
         this.emailInUse = true;
       }

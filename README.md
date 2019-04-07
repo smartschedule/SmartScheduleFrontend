@@ -1,6 +1,4 @@
-# ss
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9abb6dbd7cd14975aa66ecf2e7c88bc0)](https://app.codacy.com/app/adambajguz/SmartScheduleFrontend?utm_source=github.com&utm_medium=referral&utm_content=adambajguz/SmartScheduleFrontend&utm_campaign=Badge_Grade_Dashboard)
+# SmartScheduleFrontend
 
 ## Project setup
 ```

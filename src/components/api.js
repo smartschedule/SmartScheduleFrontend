@@ -46,7 +46,7 @@ export const rejectFriend = async id =>
     headers: { 'Content-Type': 'application/json' },
   });
 export const removeFriend = async id => {
-  console.log(id);
+  // console.log(id);
   await api.post('user/removeFriend', id, {
     headers: { 'Content-Type': 'application/json' },
   });

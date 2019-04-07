@@ -1,0 +1,4 @@
+widok tygodnia w kalendarzu
+panel u¿ytkownika (nie mam pojêcia dalej co ma w nim byæ)
+widok add event mo¿na poprawiæ
+widok add calendar mo¿na poprawiæ
