@@ -119,8 +119,6 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: left;
-  &__wrapper {
-  }
 }
 input {
   display: block;

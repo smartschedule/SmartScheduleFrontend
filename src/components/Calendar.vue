@@ -3,9 +3,9 @@
     <Events :events="eventsForCurrentDay" @addevent="$emit('addevent')" :currentDate="current"/>
     <div class="side">
       <div class="monthpicker">
-        <span class="arrow" @click="() => incrementMonth(-1)"><</span>
+        <span class="arrow" @click="() => incrementMonth(-1)">&lt;</span>
         <span class="month-name">{{getMonthYearString}}</span>
-        <span class="arrow" @click="()=> incrementMonth(1)">></span>
+        <span class="arrow" @click="()=> incrementMonth(1)">&gt;</span>
       </div>
       <div class="days">
         <div
