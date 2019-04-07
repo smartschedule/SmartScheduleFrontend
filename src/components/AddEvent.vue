@@ -16,12 +16,12 @@
       </div>
       
       <span class="font-weight-bold">Event color:</span>
-      <b-button v-b-modal="'my-modal'" :style="{background: pickedColor}" class="ml-2">Change</b-button> 
+      <b-button v-b-modal="'colorpicker-modal'" :style="{background: pickedColor}" class="ml-2 px-4">Change</b-button> 
     </b-modal>
-    <b-modal id="my-modal" size="sm" ok-only title="Choose event color">
-        <color-picker class="ml-4" style="width: 220px;"
+    <b-modal id="colorpicker-modal" size="sm" ok-only title="Choose event color">
+        <color-picker class="ml-4" style="width: 220px; -webkit-box-shadow: none; box-shadow: none;"
             :color="pickedColor"
-            theme="dark"
+            theme="light"
             @changeColor="changeColor"
         />
     </b-modal>
