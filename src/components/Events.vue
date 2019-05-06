@@ -13,9 +13,9 @@
                 <b-dropdown-item @click="$router.push({'name': 'calendarWeek'})">
                   <i class="fas fa-calendar-week"></i> Week
                 </b-dropdown-item>
-                <b-dropdown-item @click="$router.push({'name': 'calendarMonth'})">
+                <!-- <b-dropdown-item @click="$router.push({'name': 'calendarMonth'})">
                   <i class="fas fa-calendar-alt"></i> Month
-                </b-dropdown-item>
+                </b-dropdown-item>-->
               </b-dropdown>
               <b-btn size="sm" variant="success" @click="$emit('addevent')">Add Event</b-btn>
             </b-button-group>
@@ -32,7 +32,7 @@
           class="event"
           v-for="{id, name, from, to, color} in eventsMapped"
           :key="id"
-          @click="selectedEvent={name,from,to,color}"
+          @click="selectedEvent={id,name,from,to,color}"
           :style="`height: ${(to-from)*25}px; background-color: ${color}5a; margin-top: ${from*25}px;`"
         >
           <span :style="`background-color: ${color}`" class="event-thing">aaa</span>
@@ -41,6 +41,7 @@
       </div>
     </div>
     <EventDetails
+      @refresh="$emit('refresh')"
       :event="selectedEvent"
       :visible="!isEqualInstance(selectedEvent, {})"
       @clear="selectedEvent={}"
@@ -100,7 +101,7 @@ export default {
               .replace(/:/g, "")
               .slice(0, -2)
           ) / 100,
-        color: "red"
+        color: "#afafaf"
       }));
     }
   },

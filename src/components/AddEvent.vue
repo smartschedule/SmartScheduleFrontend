@@ -71,17 +71,17 @@ export default {
   data() {
     return {
       name: "",
-      datestart: "",
-      dateend: "",
+      datestart: new Date().toISOString().split("T")[0],
+      dateend: new Date().toISOString().split("T")[0],
       timestart: "",
       timeend: "",
       pickedColor: "#59c7f9"
     };
   },
   methods: {
-    addEvent() {
+    async addEvent() {
       const { datestart, dateend, timestart, timeend, name, calendarId } = this;
-      createEvent(
+      await createEvent(
         new Date([datestart, timestart].join(" ")).toISOString(),
         new Date([dateend, timeend].join(" ")).toISOString(),
         new Date().toISOString(),
@@ -92,6 +92,7 @@ export default {
         "10.10"
       );
       this.$emit("addevent");
+      this.$emit("clear");
     },
     changeColor(color) {
       this.pickedColor = color.rgba.toRgbaString();

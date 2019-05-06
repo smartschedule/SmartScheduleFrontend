@@ -35,6 +35,7 @@ export default {
       const { name, colorHex, userId } = this;
       await createCalendar(name, colorHex, userId);
       this.$emit("add");
+      this.$emit("hidden");
     }
   },
   props: {

@@ -1,6 +1,11 @@
 <template>
   <div class="calendar">
-    <Events :events="eventsForCurrentDay" @addevent="$emit('addevent')" :currentDate="current"/>
+    <Events
+      @refresh="$emit('refresh-events')"
+      :events="eventsForCurrentDay"
+      @addevent="$emit('addevent')"
+      :currentDate="current"
+    />
     <div class="side">
       <div class="monthpicker">
         <span class="arrow" @click="() => incrementMonth(-1)">&lt;</span>
@@ -12,7 +17,7 @@
           v-for="day in getDaysInMonth"
           :key="day"
           class="day"
-          :class="{'day--current': day === current.day && selectedMonth === current.month && current.year == selectedYear,
+          :class="{'day--current': (day === current.day && selectedMonth === current.month && current.year == selectedYear),
           'day--has-event': daysNumbersOnWhichEventsHappen.includes(day) }"
           @click="() => {current.day = day; current.month = selectedMonth; current.year = selectedYear}"
         >{{day}}</div>
@@ -86,10 +91,12 @@ export default {
       return events
         .filter(({ startDate }) => {
           const date = new Date(startDate.split("T")[0]);
-          date.getMonth() === selectedMonth &&
-            date.getFullYear() === selectedYear;
+          return (
+            date.getMonth() === selectedMonth &&
+            date.getFullYear() === selectedYear
+          );
         })
-        .map(({ startDate }) => new Date(startDate.splt("T")[0]).getDate());
+        .map(({ startDate }) => new Date(startDate.split("T")[0]).getDate());
     }
   },
   methods: {

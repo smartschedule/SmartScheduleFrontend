@@ -58,8 +58,6 @@ export const unblockUser = async id =>
     headers: { 'Content-Type': 'application/json' },
   });
 
-export const deleteEvent = id => api.delete('deleteEvent', { id });
-
 export const createCalendar = (name, colorHex, userId) =>
   api.post('CreateCalendar', { name, colorHex, userId });
 
@@ -69,7 +67,7 @@ export const getCalendars = async () =>
 
 export const getEvents = async () => (await api.get('events')).data.events;
 
-export const createEvent = (
+export const createEvent = async (
   startDate,
   endTime,
   reminderAt,
@@ -79,8 +77,7 @@ export const createEvent = (
   longitude,
   latitude,
 ) => {
-  console.log(startDate);
-  api.post('CreateEvent', {
+  await api.post('CreateEvent', {
     startDate,
     endTime,
     reminderAt,
@@ -91,3 +88,4 @@ export const createEvent = (
     latitude,
   });
 };
+export const deleteEvent = async id => await api.post('DeleteEvent', { id });

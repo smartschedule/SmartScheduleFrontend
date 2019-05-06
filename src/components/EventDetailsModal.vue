@@ -18,21 +18,32 @@
         </b-row>
         <b-row>
           <b-col>
-            <LMap ref="map"/>
+            <l-map :zoom="13" :center="center" ref="map">
+              <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+            </l-map>
           </b-col>
         </b-row>
       </b-container>
 
       <template slot="modal-footer">
-        <b-btn variant="danger" @click="$emit('clear')">Delete</b-btn>
+        <b-btn variant="danger" @click="deleteEventLocal(event.id)">Delete</b-btn>
       </template>
     </b-modal>
   </div>
 </template>
 
 <script>
-import { LMap, LMarker } from "vue2-leaflet";
+import { LMap, LMarker, LTileLayer } from "vue2-leaflet";
+import { deleteEvent } from "./api";
 export default {
+  data() {
+    return {
+      center: L.latLng(47.1, 47.2),
+      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    };
+  },
   props: {
     visible: {
       type: Boolean
@@ -43,13 +54,16 @@ export default {
     }
   },
   methods: {
-    deleteEvent(id) {
-      //something here later
+    async deleteEventLocal(id) {
+      await deleteEvent(id);
+      this.$emit("refresh");
+      this.$emit("clear");
     }
   },
   components: {
     LMap,
-    LMarker
+    LMarker,
+    LTileLayer
   }
 };
 </script>

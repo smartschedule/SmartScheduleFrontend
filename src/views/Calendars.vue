@@ -1,26 +1,33 @@
 <template>
-  <b-container fluid>
-    <b-row class="mt-3">
-      <b-col sm="3" lg="2" class="row-equal">
-        <CalendarPicker
-          v-model="selectedCalendarId"
-          :calendars="calendars"
-          @add="getCalendarsMethod()"
-        />
-      </b-col>
-      <b-col sm="9" lg="10" class="pl-sm-0">
-        <div class="d-flex">
-          <Calendar :events="eventsFromSelectedCalendar" @addevent="() => addEventsVisible = true"/>
-        </div>
-        <AddEvent
-          @close="()=>addEventsVisible=false"
-          :visible="addEventsVisible"
-          :calendarId="selectedCalendarId"
-          @addevent="getEventsMethod()"
-        />
-      </b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <b-container fluid v-if="$store.state.userInfo">
+      <b-row class="mt-3">
+        <b-col sm="3" lg="2" class="row-equal">
+          <CalendarPicker
+            v-model="selectedCalendarId"
+            :calendars="calendars"
+            @add="getCalendarsMethod()"
+          />
+        </b-col>
+        <b-col sm="9" lg="10" class="pl-sm-0">
+          <div class="d-flex">
+            <Calendar
+              @refresh-events="getEventsMethod()"
+              :events="eventsFromSelectedCalendar"
+              @addevent="() =>{ addEventsVisible = true; getEventsMethod();}"
+            />
+          </div>
+          <AddEvent
+            @close="()=>addEventsVisible=false"
+            :visible="addEventsVisible"
+            :calendarId="selectedCalendarId"
+            @addevent="getEventsMethod()"
+          />
+        </b-col>
+      </b-row>
+    </b-container>
+    <div v-else>Please log in</div>
+  </div>
 </template>
 
 <script>
@@ -42,7 +49,7 @@ export default {
   methods: {
     async getCalendarsMethod() {
       this.calendars = await getCalendars();
-      this.selectedCalendarId=this.calendars[0].id;
+      this.selectedCalendarId = this.calendars[0].id;
     },
     async getEventsMethod() {
       this.events = await getEvents();
