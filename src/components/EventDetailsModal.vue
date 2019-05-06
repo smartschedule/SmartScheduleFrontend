@@ -14,7 +14,11 @@
         <b-row>
           <b-col>
             <div class="badge badge-primary text-wrap">This text should wrap.</div>
-            
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <LMap ref="map"/>
           </b-col>
         </b-row>
       </b-container>
@@ -27,6 +31,7 @@
 </template>
 
 <script>
+import { LMap, LMarker } from "vue2-leaflet";
 export default {
   props: {
     visible: {
@@ -41,6 +46,10 @@ export default {
     deleteEvent(id) {
       //something here later
     }
+  },
+  components: {
+    LMap,
+    LMarker
   }
 };
 </script>

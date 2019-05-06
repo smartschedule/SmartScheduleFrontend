@@ -13,7 +13,7 @@
           :key="day"
           class="day"
           :class="{'day--current': day === current.day && selectedMonth === current.month && current.year == selectedYear,
-          'day--has-event': dayNumbersWithEventsCurrentMonth.includes(day) }"
+          'day--has-event': daysNumbersOnWhichEventsHappen.includes(day) }"
           @click="() => {current.day = day; current.month = selectedMonth; current.year = selectedYear}"
         >{{day}}</div>
       </div>
@@ -71,29 +71,32 @@ export default {
     },
     eventsForCurrentDay() {
       const { events, current } = this;
-      return events.filter(({ day, month, year }) => {
+      return events.filter(({ startDate }) => {
+        const date = new Date(startDate.split("T")[0]);
         const obj = {
-          day,
-          month,
-          year
+          day: date.getDate(),
+          month: date.getMonth(),
+          year: date.getFullYear()
         };
         return isEqual(obj, current);
       });
     },
-    dayNumbersWithEventsCurrentMonth() {
+    daysNumbersOnWhichEventsHappen() {
       const { events, selectedMonth, selectedYear } = this;
       return events
-        .filter(
-          ({ month, year }) => month === selectedMonth && year === selectedYear
-        )
-        .map(({ day }) => day);
+        .filter(({ startDate }) => {
+          const date = new Date(startDate.split("T")[0]);
+          date.getMonth() === selectedMonth &&
+            date.getFullYear() === selectedYear;
+        })
+        .map(({ startDate }) => new Date(startDate.splt("T")[0]).getDate());
     }
   },
   methods: {
     getToday() {
       const now = new Date();
       return {
-        day: now.getDay(),
+        day: now.getDate(),
         month: now.getMonth(),
         year: now.getFullYear()
       };
@@ -144,7 +147,7 @@ export default {
     }
   }
   .month-name {
-    padding-top: 4px
+    padding-top: 4px;
   }
 }
 .side {

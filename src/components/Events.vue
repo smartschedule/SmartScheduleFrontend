@@ -30,7 +30,7 @@
       <div class="time">
         <div
           class="event"
-          v-for="{id, name, from, to, color} in events"
+          v-for="{id, name, from, to, color} in eventsMapped"
           :key="id"
           @click="selectedEvent={name,from,to,color}"
           :style="`height: ${(to-from)*25}px; background-color: ${color}5a; margin-top: ${from*25}px;`"
@@ -80,6 +80,28 @@ export default {
     },
     twentyFour() {
       return [...Array(24).keys()].map(x => `${x}:00`);
+    },
+    eventsMapped() {
+      return this.events.map(ev => ({
+        ...ev,
+        from:
+          parseInt(
+            ev.startDate
+              .split("T")[1]
+              .replace("Z", "")
+              .replace(/:/g, "")
+              .slice(0, -2)
+          ) / 100,
+        to:
+          parseInt(
+            ev.endTime
+              .split("T")[1]
+              .replace("Z", "")
+              .replace(/:/g, "")
+              .slice(0, -2)
+          ) / 100,
+        color: "red"
+      }));
     }
   },
   methods: {

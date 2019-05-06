@@ -11,8 +11,9 @@
         :key="id"
         @click="$emit('input', id)"
         class="calendar-picker__calendar"
-        :class="{'active': value===id}">{{name}}</b-list-group-item>
-      <AddCalendar :visible="isAddVisible" @hidden="isAddVisible=false"/>
+        :class="{'active': value===id}"
+      >{{name}}</b-list-group-item>
+      <AddCalendar :visible="isAddVisible" @hidden="isAddVisible=false" @add="$emit('add')"/>
     </b-list-group>
   </div>
 </template>
