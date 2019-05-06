@@ -20,7 +20,6 @@ export const getUserDetails = async () => (await api.get('user/details')).data;
 
 export const getAllUsers = async () => (await api.get('users')).data.users;
 
-export const getCalendars = () => api.get('getCalendars');
 export const getFriendsList = async () =>
   (await api.get('user/getFriendsList')).data.users;
 export const getCurrentUsersFriendRequests = async () =>
@@ -46,7 +45,6 @@ export const rejectFriend = async id =>
     headers: { 'Content-Type': 'application/json' },
   });
 export const removeFriend = async id => {
-  // console.log(id);
   await api.post('user/removeFriend', id, {
     headers: { 'Content-Type': 'application/json' },
   });
@@ -59,5 +57,37 @@ export const unblockUser = async id =>
   await api.post('user/unblockUser', id, {
     headers: { 'Content-Type': 'application/json' },
   });
-export const getEvents = calendarId => api.get('getEvents', { calendarId });
+
 export const deleteEvent = id => api.delete('deleteEvent', { id });
+
+export const createCalendar = (name, colorHex, userId) =>
+  api.post('CreateCalendar', { name, colorHex, userId });
+
+export const deleteCalendar = id => api.get('DeleteCalendar', { id });
+export const getCalendars = async () =>
+  (await api.get('calendars')).data.calendars;
+
+export const getEvents = async () => (await api.get('events')).data.events;
+
+export const createEvent = (
+  startDate,
+  endTime,
+  reminderAt,
+  name,
+  repeatsEvery,
+  calendarId,
+  longitude,
+  latitude,
+) => {
+  console.log(startDate);
+  api.post('CreateEvent', {
+    startDate,
+    endTime,
+    reminderAt,
+    name,
+    repeatsEvery,
+    calendarId,
+    longitude,
+    latitude,
+  });
+};
