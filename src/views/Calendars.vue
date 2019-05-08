@@ -7,6 +7,7 @@
             v-model="selectedCalendarId"
             :calendars="calendars"
             @add="getCalendarsMethod()"
+            @refresh-calendar="getCalendarsMethod()"
           />
         </b-col>
         <b-col sm="9" lg="10" class="pl-sm-0">

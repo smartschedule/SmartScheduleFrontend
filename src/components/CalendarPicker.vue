@@ -4,15 +4,17 @@
       <b>Calendars</b>
       <b-btn size="sm" variant="success" class="ml-2" @click="isAddVisible=true">Add</b-btn>
     </div>
-
-    <b-list-group>
-      <b-list-group-item
-        v-for="{name, id} in calendars"
-        :key="id"
-        @click="$emit('input', id)"
-        class="calendar-picker__calendar"
-        :class="{'active': value===id}"
-      >{{name}}</b-list-group-item>
+    <CalendarPickerItem
+      v-for="{name, id} in calendars"
+      :name="name"
+      :key="id"
+      :id="id"
+      @click="$emit('input', id)"
+      @update="(id,name) => updateCalendarInstance(id,name)"
+      class="calendar-picker__calendar"
+      :class="{'active': value===id}"
+    />
+    <b-list-group class="calendar-row">
       <AddCalendar :visible="isAddVisible" @hidden="isAddVisible=false" @add="$emit('add')"/>
     </b-list-group>
   </div>
@@ -20,13 +22,26 @@
 
 <script>
 import AddCalendar from "./AddCalendar";
+import CalendarPickerItem from "./CalendarPickerItem";
+import { deleteCalendar, updateCalendar } from "./api.js";
 export default {
   data() {
     return {
-      isAddVisible: false
+      isAddVisible: false,
+      calendarId: null
     };
   },
-  components: { AddCalendar },
+  components: { AddCalendar, CalendarPickerItem },
+  methods: {
+    async deleteCalendarClick(id) {
+      await deleteCalendar(id);
+      this.$emit("refresh-calendar");
+    },
+    async updateCalendarInstance(id, name) {
+      await updateCalendar(id, name);
+      this.$emit("refresh-calendar");
+    }
+  },
   props: {
     calendars: {
       type: Array,
@@ -54,6 +69,7 @@ export default {
     &::before {
       margin-right: 5px;
     }
+    display: flex;
   }
 }
 </style>

@@ -61,9 +61,13 @@ export const unblockUser = async id =>
 export const createCalendar = (name, colorHex, userId) =>
   api.post('CreateCalendar', { name, colorHex, userId });
 
-export const deleteCalendar = id => api.get('DeleteCalendar', { id });
+export const deleteCalendar = async id =>
+  await api.post('DeleteCalendar', { id });
 export const getCalendars = async () =>
   (await api.get('calendars')).data.calendars;
+
+export const updateCalendar = async (id, name) =>
+  await api.post('UpdateCalendar', { id, name, colorHex: '#ffff' });
 
 export const getEvents = async () => (await api.get('events')).data.events;
 

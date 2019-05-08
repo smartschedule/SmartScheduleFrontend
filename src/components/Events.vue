@@ -43,7 +43,7 @@
     <EventDetails
       @refresh="$emit('refresh')"
       :event="selectedEvent"
-      :visible="!isEqualInstance(selectedEvent, {})"
+      :visible="!isEqual(selectedEvent, {})"
       @clear="selectedEvent={}"
     />
   </div>
@@ -106,9 +106,7 @@ export default {
     }
   },
   methods: {
-    isEqualInstance(x, y) {
-      return isEqual(x, y);
-    }
+    isEqual
   }
 };
 </script>
