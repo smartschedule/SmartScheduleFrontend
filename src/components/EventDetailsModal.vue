@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal :visible="visible" @hidden="$emit('clear')" title="Event details">
+    <b-modal size="lg" :visible="visible" @hidden="$emit('clear')" title="Event details">
       <b-container class="text-left">
         <b-row>
           <b-col>{{event.name}}</b-col>
@@ -18,9 +18,14 @@
         </b-row>
         <b-row>
           <b-col>
-            <l-map :zoom="13" :center="center" ref="map">
-              <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-            </l-map>
+            <weather
+              api-key="d446f4d8685236e5d73272500e77b112"
+              title="Weather"
+              latitude="24.886436"
+              longitude="91.880722"
+              language="en"
+              units="uk"
+            />
           </b-col>
         </b-row>
       </b-container>
@@ -35,6 +40,9 @@
 <script>
 import { LMap, LMarker, LTileLayer } from "vue2-leaflet";
 import { deleteEvent } from "./api";
+import "vue-weather-widget/dist/css/vue-weather-widget.css";
+import VueWeatherWidget from "vue-weather-widget";
+
 export default {
   data() {
     return {
@@ -60,7 +68,13 @@ export default {
       this.$emit("clear");
     }
   },
+  computed: {
+    whatever() {
+      if (visible == true) this.$refs.map.invalidateSize();
+    }
+  },
   components: {
+    weather: VueWeatherWidget,
     LMap,
     LMarker,
     LTileLayer
