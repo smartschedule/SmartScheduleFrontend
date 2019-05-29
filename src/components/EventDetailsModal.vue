@@ -1,15 +1,18 @@
 <template>
   <div>
-    <b-modal size="lg" :visible="visible" @hidden="$emit('clear')" title="Event details">
+    <b-modal
+      size="lg"
+      :visible="visible"
+      @hidden="$emit('clear')"
+      title="Event details"
+      @shown="modalShown"
+    >
       <b-container class="text-left">
         <b-row>
-          <b-col>{{event.name}}</b-col>
-        </b-row>
-        <b-row class="mt-3">
-          <b-col>Date: {{event.day}}/{{event.month}}/{{event.year}}</b-col>
+          <b-col>{{event.title}}</b-col>
         </b-row>
         <b-row>
-          <b-col>Time: {{event.from}} - {{event.to}}</b-col>
+          <b-col>Time: {{event.start}} - {{event.end}}</b-col>
         </b-row>
         <b-row>
           <b-col>
@@ -21,13 +24,20 @@
             <weather
               api-key="d446f4d8685236e5d73272500e77b112"
               title="Weather"
-              latitude="24.886436"
-              longitude="91.880722"
+              :latitude="event.latitude"
+              :longitude="event.longitude"
+              :hide-header="true"
               language="en"
-              units="uk"
+              units="si"
             />
           </b-col>
         </b-row>
+        <div class="foobar1">
+          <l-map :center="center" :zoom="13" ref="mymap">
+            <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+            <l-marker :lat-lng="center"></l-marker>
+          </l-map>
+        </div>
       </b-container>
 
       <template slot="modal-footer">
@@ -38,6 +48,7 @@
 </template>
 
 <script>
+import * as moment from "moment";
 import { LMap, LMarker, LTileLayer } from "vue2-leaflet";
 import { deleteEvent } from "./api";
 import "vue-weather-widget/dist/css/vue-weather-widget.css";
@@ -66,6 +77,12 @@ export default {
       await deleteEvent(id);
       this.$emit("refresh");
       this.$emit("clear");
+    },
+    modalShown() {
+      console.log(this.$refs.mymap.mapObject);
+      setTimeout(() => {
+        this.$refs.mymap.mapObject.invalidateSize();
+      }, 100);
     }
   },
   computed: {
@@ -83,4 +100,8 @@ export default {
 </script>
 
 <style lang="scss">
+.foobar1 {
+  width: 400px;
+  height: 400px;
+}
 </style>

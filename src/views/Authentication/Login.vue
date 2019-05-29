@@ -40,7 +40,7 @@
 
         <form v-else class="login100-form validate-form flex-sb flex-w px-4 py-2">
           <span class="login100-form-title pb-5">Account Login</span>
-          
+
           <span class="txt1 pb-2">Username</span>
           <!-- <span class="txt1 pb-2">
             <div class="error">{{message}}</div>
@@ -105,8 +105,8 @@ import { getToken, setToken, tokenToStore } from "$c/token";
 export default {
   data() {
     return {
-      username: "",
-      password: "",
+      username: "test@test.com",
+      password: "test1234",
       message: "",
       validateError: false,
       passwordFieldType: 'password'

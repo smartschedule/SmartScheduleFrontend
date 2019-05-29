@@ -1,5 +1,11 @@
 <template>
   <div>
+    <EventDetailsModal
+      v-if="selectedEventId"
+      :event="findSelected"
+      :visible="true"
+      @clear="selectedEventId=null"
+    />
     <b-container fluid v-if="$store.state.userInfo">
       <b-row class="mt-3">
         <b-col sm="3" lg="2" class="row-equal">
@@ -12,10 +18,16 @@
         </b-col>
         <b-col sm="9" lg="10" class="pl-sm-0">
           <div class="d-flex">
-            <Calendar
+            <!-- <Calendar
               @refresh-events="getEventsMethod()"
               :events="eventsFromSelectedCalendar"
               @addevent="() =>{ addEventsVisible = true; getEventsMethod();}"
+            />-->
+            <FullCalendar
+              :events="eventsFromSelectedCalendar"
+              @event-selected="eventSelected"
+              ref="fullcalendar"
+              @day-click="dayClick"
             />
           </div>
           <AddEvent
@@ -37,6 +49,9 @@ import Calendar from "$c/Calendar";
 import AddEvent from "$c/AddEvent";
 import { events } from "$c/helpers.js";
 import { getCalendars, getEvents } from "../components/api.js";
+import { FullCalendar } from "vue-full-calendar";
+import EventDetailsModal from "../components/EventDetailsModal";
+import "fullcalendar/dist/fullcalendar.css";
 
 export default {
   data() {
@@ -44,7 +59,8 @@ export default {
       events,
       calendars: [],
       addEventsVisible: false,
-      selectedCalendarId: 0
+      selectedCalendarId: 0,
+      selectedEventId: null
     };
   },
   methods: {
@@ -54,16 +70,41 @@ export default {
     },
     async getEventsMethod() {
       this.events = await getEvents();
+    },
+    formatEvents(ev) {
+      const { startDate: start, endTime: end, name: title, ...rest } = ev;
+      return { start, end, title, ...rest };
+    },
+    dayClick(e) {
+      this.$refs.fullcalendar.fireMethod("changeView", "agendaDay", e._d);
+    },
+    eventSelected(e) {
+      this.selectedEventId = e.id;
     }
   },
   async mounted() {
     this.getCalendarsMethod();
     this.getEventsMethod();
   },
-  components: { Calendar, AddEvent, CalendarPicker },
+  components: {
+    Calendar,
+    AddEvent,
+    CalendarPicker,
+    FullCalendar,
+    EventDetailsModal
+  },
   computed: {
     eventsFromSelectedCalendar() {
-      return this.events.filter(x => x.calendarId === this.selectedCalendarId);
+      const currentCalendar = this.events.filter(
+        x => x.calendarId === this.selectedCalendarId
+      );
+      return currentCalendar.map(this.formatEvents);
+    },
+    findSelected() {
+      const ev = this.eventsFromSelectedCalendar.find(
+        x => this.selectedEventId === x.id
+      );
+      return ev || {};
     }
   }
 };
