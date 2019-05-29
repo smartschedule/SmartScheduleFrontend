@@ -57,7 +57,7 @@ import VueWeatherWidget from "vue-weather-widget";
 export default {
   data() {
     return {
-      center: L.latLng(47.1, 47.2),
+      center: L.latLng(event.latitude, event.longitude),
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

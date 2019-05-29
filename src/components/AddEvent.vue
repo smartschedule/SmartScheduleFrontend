@@ -28,7 +28,11 @@
         <span class="font-weight-normal">To:</span>
         <b-input class="inline" type="time" v-model="timeend"/>
       </div>
-
+      <div>
+        Latitude:
+        <b-input class="inline" v-model="lat" type="number"/>Longitude:
+        <b-input class="inline" v-model="lng" type="number"/>
+      </div>
       <span class="font-weight-bold">Event color:</span>
       <b-button
         v-b-modal="'colorpicker-modal'"
@@ -75,12 +79,23 @@ export default {
       dateend: new Date().toISOString().split("T")[0],
       timestart: "",
       timeend: "",
-      pickedColor: "#59c7f9"
+      pickedColor: "#59c7f9",
+      lat: 0,
+      lng: 0
     };
   },
   methods: {
     async addEvent() {
-      const { datestart, dateend, timestart, timeend, name, calendarId } = this;
+      const {
+        datestart,
+        dateend,
+        timestart,
+        timeend,
+        name,
+        calendarId,
+        lat,
+        lng
+      } = this;
       await createEvent(
         new Date([datestart, timestart].join(" ")).toISOString(),
         new Date([dateend, timeend].join(" ")).toISOString(),
@@ -88,8 +103,8 @@ export default {
         name,
         7,
         calendarId,
-        "00.00",
-        "10.10"
+        lat,
+        lng
       );
       this.$emit("addevent");
       this.$emit("clear");

@@ -4,7 +4,7 @@
       v-if="selectedEventId"
       :event="findSelected"
       :visible="true"
-      @clear="selectedEventId=null"
+      @clear="()=> {selectedEventId=null; this.getEventsMethod()}"
     />
     <b-btn
       size="sm"
