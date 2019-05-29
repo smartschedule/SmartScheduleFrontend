@@ -6,6 +6,12 @@
       :visible="true"
       @clear="selectedEventId=null"
     />
+    <b-btn
+      size="sm"
+      variant="success"
+      style="float: right;"
+      @click="addEventsVisible=true"
+    >Add Event</b-btn>
     <b-container fluid v-if="$store.state.userInfo">
       <b-row class="mt-3">
         <b-col sm="3" lg="2" class="row-equal">
