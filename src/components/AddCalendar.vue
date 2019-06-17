@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       name: "",
-      colorHex: "afafaf",
+      colorHex: "#afafaf",
       userId: this.$store.userInfo
     };
   },

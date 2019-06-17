@@ -32,31 +32,55 @@ export const getBlockedUsers = async () =>
 //friends
 
 export const acceptFriend = async id =>
-  await api.post('user/acceptFriendRequest', id, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  await api.post(
+    'user/acceptFriendRequest',
+    { id },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 
 export const createFriendRequest = async id =>
-  await api.post('user/friendRequest', id, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  await api.post(
+    'user/friendRequest',
+    { id },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 export const rejectFriend = async id =>
-  await api.post('user/rejectFriendRequest', id, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  await api.post(
+    'user/rejectFriendRequest',
+    { id },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 export const removeFriend = async id => {
-  await api.post('user/removeFriend', id, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  await api.post(
+    'user/removeFriend',
+    { id },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 };
 export const blockUser = async id =>
-  await api.post('user/blockUser', id, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  await api.post(
+    'user/blockUser',
+    { id },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 export const unblockUser = async id =>
-  await api.post('user/unblockUser', id, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  await api.post(
+    'user/unblockUser',
+    { id },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 
 export const createCalendar = (name, colorHex, userId) =>
   api.post('calendar/create', { name, colorHex, userId });
@@ -73,20 +97,26 @@ export const getEvents = async () => (await api.get('events')).data.events;
 
 export const createEvent = async (
   startDate,
-  endTime,
-  reminderAt,
-  name,
+  duration,
+  reminderBefore,
   repeatsEvery,
+  repeatsTo,
+  type,
+  name,
+  colorHex,
   calendarId,
   longitude,
   latitude,
 ) => {
   await api.post('event/create', {
     startDate,
-    endTime,
-    reminderAt,
-    name,
+    duration,
+    reminderBefore,
     repeatsEvery,
+    repeatsTo,
+    type,
+    name,
+    colorHex,
     calendarId,
     longitude,
     latitude,

@@ -98,10 +98,13 @@ export default {
       } = this;
       await createEvent(
         new Date([datestart, timestart].join(" ")).toISOString(),
-        new Date([dateend, timeend].join(" ")).toISOString(),
-        new Date().toISOString(),
+        3600,
+        new Date([datestart, timestart].join(" ").toISOString()),
+        "3600",
+        new Date([datestart, timestart].join(" ")).toISOString(),
+        type,
         name,
-        7,
+        "",
         calendarId,
         lat,
         lng

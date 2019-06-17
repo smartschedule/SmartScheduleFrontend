@@ -5,10 +5,17 @@
         <!-- Tabs with card integration -->
         <b-card no-body>
           <b-tabs small card>
-
-            <b-tab title="Friend Search">             
+            <b-tab title="Friend Search">
               <b-input v-model="friendSearch" class="mb-2" placeholder="Search friends"/>
-              <b-table small outlined responsive striped hover :items="foundFriends" v-bind="tableCommon">
+              <b-table
+                small
+                outlined
+                responsive
+                striped
+                hover
+                :items="foundFriends"
+                v-bind="tableCommon"
+              >
                 <template slot="options" slot-scope="{item: {id}}">
                   <b-btn
                     variant="success"
@@ -20,7 +27,15 @@
             </b-tab>
 
             <b-tab title="Friends">
-              <b-table small outlined responsive striped hover :items="buddies" v-bind="tableCommon">
+              <b-table
+                small
+                outlined
+                responsive
+                striped
+                hover
+                :items="buddies"
+                v-bind="tableCommon"
+              >
                 <template slot="options" slot-scope="{item: {id}}">
                   <b-btn
                     variant="danger"
@@ -32,11 +47,27 @@
             </b-tab>
 
             <b-tab title="Sent">
-              <b-table small outlined responsive striped hover :items="sentBuddyRequests" v-bind="tableCommon"></b-table>
+              <b-table
+                small
+                outlined
+                responsive
+                striped
+                hover
+                :items="sentBuddyRequests"
+                v-bind="tableCommon"
+              ></b-table>
             </b-tab>
 
             <b-tab title="Received">
-              <b-table small outlined responsive striped hover :items="receivedBuddyRequests" v-bind="tableCommon">
+              <b-table
+                small
+                outlined
+                responsive
+                striped
+                hover
+                :items="receivedBuddyRequests"
+                v-bind="tableCommon"
+              >
                 <template slot="options" slot-scope="{item: {id}}">
                   <b-btn
                     variant="success"
@@ -56,7 +87,15 @@
             <b-tab title="Blocked">
               <b-input class="mb-2" placeholder="Search users to block"></b-input>
 
-              <b-table small outlined responsive striped hover :items="blockedUsers" v-bind="tableCommon">
+              <b-table
+                small
+                outlined
+                responsive
+                striped
+                hover
+                :items="blockedUsers"
+                v-bind="tableCommon"
+              >
                 <template slot="options" slot-scope="{item:{id}}">
                   <b-btn
                     variant="danger"
@@ -69,17 +108,24 @@
 
             <b-tab title="Blocked Search">
               <b-input v-model="friendSearch" class="mb-2" placeholder="Search friends"/>
-              <b-table small outlined responsive striped hover :items="foundFriends" v-bind="tableCommon">
+              <b-table
+                small
+                outlined
+                responsive
+                striped
+                hover
+                :items="foundFriends"
+                v-bind="tableCommon"
+              >
                 <template slot="options" slot-scope="{item: {id}}">
                   <b-btn
                     variant="danger"
                     size="sm"
-                    @click="blockeUser(id); allUsers = removeFrom(allUsers, id)"
+                    @click="blockUser(id); allUsers = removeFrom(allUsers, id)"
                   >Block</b-btn>
                 </template>
               </b-table>
             </b-tab>
-
           </b-tabs>
         </b-card>
       </div>
@@ -146,23 +192,23 @@ export default {
         "show-empty": true,
         fields: [
           {
-            key: 'id',
-            label: 'ID',
+            key: "id",
+            label: "ID",
             sortable: true
           },
           {
-            key: 'name',
-            label: 'Full name',
+            key: "name",
+            label: "Full name",
             sortable: true
           },
           {
-            key: 'email',
-            label: 'e-mail',
+            key: "email",
+            label: "e-mail",
             sortable: true
           },
           {
-            key: 'options',
-            label: 'Actions',
+            key: "options",
+            label: "Actions",
             sortable: false
           }
         ]
